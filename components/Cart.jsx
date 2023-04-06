@@ -43,6 +43,8 @@ const Cart = () => {
     stripe.redirectToCheckout({ sessionId: data.id });
   };
 
+  console.log(cartItems);
+
   return (
     <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
@@ -59,7 +61,7 @@ const Cart = () => {
         {cartItems.length < 1 && (
           <div className="empty-cart">
             <AiOutlineShopping size={150} />
-            <h3>Your shopping bag is empty</h3>
+            <h3>Your cart is empty</h3>
             <Link href="/">
               <button
                 type="button"
@@ -76,13 +78,24 @@ const Cart = () => {
           {cartItems.length >= 1 &&
             cartItems.map((item) => (
               <div className="product" key={item._id}>
-                <img
-                  src={urlFor(item?.image[0])}
-                  className="cart-product-image"
-                />
+                <Link
+                  href={`/product/${item.slug.current}`}
+                  onClick={() => setShowCart(false)}
+                >
+                  <img
+                    src={urlFor(item?.image[0])}
+                    className="cart-product-image"
+                    
+                  />
+                </Link>
                 <div className="item-desc">
                   <div className="flex top">
-                    <h5>{item.name}</h5>
+                    <Link
+                      href={`/product/${item.slug.current}`}
+                      onClick={() => setShowCart(false)}
+                    >
+                      <h5>{item.name}</h5>
+                    </Link>
                     <h4>${item.price}</h4>
                   </div>
                   <div className="flex bottom">
