@@ -43,8 +43,6 @@ const Cart = () => {
     stripe.redirectToCheckout({ sessionId: data.id });
   };
 
-  console.log(cartItems);
-
   return (
     <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
